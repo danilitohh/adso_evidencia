@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block title %}Inicio | Tecnopunto{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <h1>¡Bienvenido a Tecnopunto!</h1>
+    <p>Gestiona los productos de tu tienda de forma rápida y sencilla.</p>
+    <a class="button" href="{% url 'productos:list' %}">Ir al listado de productos</a>
+</section>
+{% endblock %}

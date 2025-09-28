@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title %}Productos | Tecnopunto{% endblock %}
+
+{% block content %}
+<section class="card">
+    <div class="card__header">
+        <h2>Productos</h2>
+        <a class="button button--primary" href="{% url 'productos:create' %}">Nuevo producto</a>
+    </div>
+    {% if productos %}
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Precio</th>
+                        <th>Stock</th>
+                        <th>Actualizado</th>
+                        <th class="table__actions">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for producto in productos %}
+                        <tr>
+                            <td>{{ producto.nombre }}</td>
+                            <td>${{ producto.precio|floatformat:2 }}</td>
+                            <td>{{ producto.cantidad_stock }}</td>
+                            <td>{{ producto.fecha_ultima_modificacion|date:'d/m/Y' }}</td>
+                            <td class="table__actions">
+                                <a href="{% url 'productos:update' producto.pk %}">Editar</a>
+                                <a class="danger" href="{% url 'productos:delete' producto.pk %}">Eliminar</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% if is_paginated %}
+            <nav class="pagination">
+                {% if page_obj.has_previous %}
+                    <a class="pagination__link" href="?page={{ page_obj.previous_page_number }}">&laquo; Anterior</a>
+                {% else %}
+                    <span class="pagination__link pagination__link--disabled">&laquo; Anterior</span>
+                {% endif %}
+
+                <span class="pagination__page">{{ page_obj.number }}</span>
+
+                {% if page_obj.has_next %}
+                    <a class="pagination__link" href="?page={{ page_obj.next_page_number }}">Siguiente &raquo;</a>
+                {% else %}
+                    <span class="pagination__link pagination__link--disabled">Siguiente &raquo;</span>
+                {% endif %}
+            </nav>
+        {% endif %}
+    {% else %}
+        <p class="empty-state">No hay productos registrados todavía.</p>
+    {% endif %}
+</section>
+{% endblock %}

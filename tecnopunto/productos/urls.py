@@ -1,19 +1,11 @@
 from django.urls import path
+from . import views  # Importamos las vistas de la aplicación productos
 
-from .views import (
-    InicioView,
-    ProductoCreateView,
-    ProductoDeleteView,
-    ProductoListView,
-    ProductoUpdateView,
-)
 
 app_name = 'productos'
-
 urlpatterns = [
-    path('', ProductoListView.as_view(), name='list'),
-    path('nuevo/', ProductoCreateView.as_view(), name='create'),
-    path('<int:pk>/editar/', ProductoUpdateView.as_view(), name='update'),
-    path('<int:pk>/eliminar/', ProductoDeleteView.as_view(), name='delete'),
-    path('inicio/', InicioView.as_view(), name='inicio'),
+   path('', views.lista_productos, name='lista'),
+   path('nuevo/', views.create_product, name='nuevo'),
+   path('editar/<int:pk>/', views.edit_product, name='editar'),
+   path('eliminar/<int:pk>/', views.delete_product, name='eliminar'),
 ]

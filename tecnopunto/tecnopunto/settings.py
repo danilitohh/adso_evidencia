@@ -13,6 +13,9 @@ STATICFILES_DIRS = [
 
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
+STORE_NAME = 'TecnoPunto'
+STORE_DESCRIPTION = 'TecnoPunto es tu aliado en soluciones tecnológicas para el aula y la oficina.'
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
@@ -60,6 +63,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'tecnopunto.context_processors.tienda_context',
             ],
         },
     },

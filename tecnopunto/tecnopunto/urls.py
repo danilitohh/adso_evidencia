@@ -1,11 +1,10 @@
 from django.contrib import admin
-from django.urls import path,include
-from productos.views import inicio
+from django.urls import include, path
 
+from productos.views import InicioView
 
 urlpatterns = [
-   path('admin/', admin.site.urls),
-   path('', inicio, name='inicio'), #ruta para la página de inicio
-   path('productos/', include('productos.urls')),  # ruta para las vistas de productos
+    path('admin/', admin.site.urls),
+    path('', InicioView.as_view(), name='inicio'),
+    path('productos/', include('productos.urls')),
 ]
-

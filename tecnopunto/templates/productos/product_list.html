@@ -2,7 +2,7 @@
 {% block content %}
 <div class="container py-4">
  <h1>Productos</h1>
- <a href="{% url 'productos:nuevo' %}" class="btn btn-primary mb-3">Nuevo producto</a>
+ <a href="{% url 'productos:create' %}" class="btn btn-primary mb-3">Nuevo producto</a>
  <table class="table table-striped">
    <thead>
      <tr>
@@ -17,7 +17,7 @@
        <td>{{ p.cantidad_stock }}</td>
        <td>{{ p.fecha_ultima_modificacion }}</td>
        <td>
-         <a href="{% url 'productos:editar' p.pk %}" class="btn btn-sm btn-warning">Editar</a>
+         <a href="{% url 'productos:update' p.pk %}" class="btn btn-sm btn-warning">Editar</a>
          <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal" data-pk="{{ p.pk }}" data-nombre="{{ p.nombre }}">
            Eliminar
          </button>
@@ -84,7 +84,7 @@
    var pk = button.getAttribute('data-pk')
    var name = button.getAttribute('data-nombre')
    var form = deleteModal.querySelector('#deleteForm')
-   form.action = "{% url 'productos:eliminar' '0' %}".replace('0', pk)
+   form.action = "{% url 'productos:delete' '0' %}".replace('0', pk)
    deleteModal.querySelector('#modalProductName').textContent = name
  })
 </script>

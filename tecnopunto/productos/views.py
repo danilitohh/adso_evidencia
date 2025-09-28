@@ -17,6 +17,32 @@ class ProductoListView(ListView):
     paginate_by = 10
     ordering = ['-fecha_ultima_modificacion']
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        paginator = context.get('paginator')
+        page_obj = context.get('page_obj')
+        if paginator and page_obj:
+            current = page_obj.number
+            total = paginator.num_pages
+            start = max(current - 1, 1)
+            end = min(start + 2, total)
+            start = max(end - 2, 1)
+            pages = list(range(start, end + 1))
+            context['page_numbers'] = pages
+            context['total_pages'] = total
+            if pages:
+                first = pages[0]
+                last = pages[-1]
+            else:
+                first = last = None
+            context['first_page_in_window'] = first
+            context['last_page_in_window'] = last
+            context['show_first'] = start > 1
+            context['show_first_ellipsis'] = first is not None and first > 2
+            context['show_last'] = end < total
+            context['show_last_ellipsis'] = last is not None and last < total - 1
+        return context
+
 
 class BaseProductoFormView:
     model = Producto

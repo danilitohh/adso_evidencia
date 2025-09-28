@@ -214,6 +214,11 @@ body {
     color: var(--border);
 }
 
+.pagination__ellipsis {
+    color: var(--muted);
+    padding: 0.5rem 0.75rem;
+}
+
 .pagination__page {
     background: var(--primary);
     border-color: var(--primary);
